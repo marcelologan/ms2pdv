@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProdutoForm } from '../components/ProdutoForm';
 import { decodificarToken } from '../utils/auth';
+import { API_URL } from '../config/api';
 
 interface Categoria {
     id: number;
@@ -65,10 +66,10 @@ export function Categorias() {
             }
 
             try {
-                const respostaCategorias = await fetch('http://localhost:3000/api/categorias', {
+                const respostaCategorias = await fetch(`${API_URL}/api/categorias`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                const respostaProdutos = await fetch(`http://localhost:3000/api/produtos/usuario/${payload.id}`, {
+                const respostaProdutos = await fetch(`${API_URL}/api/produtos/usuario/${payload.id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
@@ -149,8 +150,8 @@ export function Categorias() {
         try {
             const isEdicao = !!categoriaEditando;
             const url = isEdicao 
-                ? `http://localhost:3000/api/categorias/${categoriaEditando.id}`
-                : 'http://localhost:3000/api/categorias/cadastrar';
+                ? `${API_URL}/api/categorias/${categoriaEditando.id}`
+                : `${API_URL}/api/categorias/cadastrar`;
             
             const metodo = isEdicao ? 'PUT' : 'POST';
 
@@ -206,7 +207,7 @@ export function Categorias() {
         const token = localStorage.getItem('ms2pdv_token');
 
         try {
-            const resposta = await fetch(`http://localhost:3000/api/categorias/excluir/${categoriaParaExcluir.id}`, {
+            const resposta = await fetch(`${API_URL}/api/categorias/excluir/${categoriaParaExcluir.id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -234,7 +235,7 @@ export function Categorias() {
 
         const token = localStorage.getItem('ms2pdv_token');
         try {
-            const resposta = await fetch(`http://localhost:3000/api/produtos/excluir/${produto.id}`, {
+            const resposta = await fetch(`${API_URL}/api/produtos/excluir/${produto.id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

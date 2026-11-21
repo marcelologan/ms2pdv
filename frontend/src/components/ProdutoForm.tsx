@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_URL } from '../config/api';
 
 // 1. Tipamos o que esse formulário precisa receber do Componente Pai (Dashboard)
 interface Categoria {
@@ -47,8 +48,8 @@ export function ProdutoForm({ categorias, aoSalvar, aoCancelar, produtoEditando 
         try {
             const isEdicao = !!produtoEditando;
             const url = isEdicao
-                ? `http://localhost:3000/api/produtos/${produtoEditando.id}`
-                : 'http://localhost:3000/api/produtos/cadastrar';
+                ? `${API_URL}/api/produtos/${produtoEditando.id}`
+                : `${API_URL}/api/produtos/cadastrar`;
 
             const metodoHTTP = isEdicao ? 'PUT' : 'POST';
 

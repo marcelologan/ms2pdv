@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { decodificarToken } from '../utils/auth';
+import { API_URL } from '../config/api';
 
 // 1. Tipamos os dados necessários para o componente
 export interface Produto {
@@ -164,7 +165,7 @@ export function VendaForm({ produtos, aoSalvar, aoCancelar }: VendaFormProps) {
         setCarregando(true);
 
         try {
-            const resposta = await fetch('http://localhost:3000/api/vendas/cadastrar', {
+            const resposta = await fetch(`${API_URL}/api/vendas/cadastrar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

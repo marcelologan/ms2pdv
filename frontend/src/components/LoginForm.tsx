@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // 1. Importamos as ferramentas de navegação e rotas
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export function LoginForm() {
     // 1. Estados de Dados
@@ -30,7 +31,7 @@ export function LoginForm() {
 
         try {
             // A PONTE HTTP: Disparamos o 'fetch' contra a rota que criamos no Módulo 2
-            const resposta = await fetch('http://localhost:3000/api/login', {
+            const resposta = await fetch(`${API_URL}/api/login`, {
                 method: 'POST', // O verbo HTTP para envio de dados sigilosos
                 headers: {
                     'Content-Type': 'application/json' // Avisa o Node.js que estamos enviando JSON

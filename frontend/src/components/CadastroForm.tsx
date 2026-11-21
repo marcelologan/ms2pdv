@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export function CadastroForm() {
     // 1. Estados de Dados
@@ -41,7 +42,7 @@ export function CadastroForm() {
 
         try {
             // Chamada à rota pública de criação de usuários analisada no controller
-            const resposta = await fetch('http://localhost:3000/api/usuarios/cadastrar', {
+            const resposta = await fetch(`${API_URL}/api/usuarios/cadastrar`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

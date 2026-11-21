@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProdutoForm } from '../components/ProdutoForm';
 import { DashboardCharts, type IEvolucaoVenda, type IVendaCategoria } from '../components/DashboardCharts';
 import { decodificarToken } from '../utils/auth';
+import { API_URL } from '../config/api';
 export type { IEvolucaoVenda, IVendaCategoria };
 
 // 1. Tipos de dados do Dashboard e Inventário
@@ -121,7 +122,7 @@ export function Dashboard() {
 
         try {
             // Monta query params com base na escolha do filtro
-            let queryUrl = 'http://localhost:3000/api/dashboard';
+            let queryUrl = `${API_URL}/api/dashboard`;
             if (tipoFiltro === 'mes' && mesFiltro) {
                 queryUrl += `?mes=${mesFiltro}`;
             } else if (tipoFiltro === 'periodo' && dataInicio && dataFim) {
@@ -166,10 +167,10 @@ export function Dashboard() {
 
         try {
             const [respProdutos, respCategorias] = await Promise.all([
-                fetch(`http://localhost:3000/api/produtos/usuario/${payload.id}`, {
+                fetch(`${API_URL}/api/produtos/usuario/${payload.id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 }),
-                fetch('http://localhost:3000/api/categorias', {
+                fetch(`${API_URL}/api/categorias`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 })
             ]);
@@ -248,7 +249,7 @@ export function Dashboard() {
 
         const token = localStorage.getItem('ms2pdv_token');
         try {
-            const resposta = await fetch(`http://localhost:3000/api/produtos/excluir/${id}`, {
+            const resposta = await fetch(`${API_URL}/api/produtos/excluir/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

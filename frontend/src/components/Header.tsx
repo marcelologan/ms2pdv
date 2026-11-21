@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { API_URL } from '../config/api';
 
 export function Header() {
     const navegar = useNavigate();
@@ -25,7 +26,7 @@ export function Header() {
     const efetuarLogout = async () => {
         const token = localStorage.getItem('ms2pdv_token');
         try {
-            await fetch('http://localhost:3000/api/logout', {
+            await fetch(`${API_URL}/api/logout`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

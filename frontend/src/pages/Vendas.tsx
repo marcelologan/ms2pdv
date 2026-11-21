@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { VendaForm, type Produto, type VendaSalva } from '../components/VendaForm';
 import { decodificarToken } from '../utils/auth';
+import { API_URL } from '../config/api';
 
 // 1. Tipos de dados do módulo de vendas
 interface Venda {
@@ -72,10 +73,10 @@ export function Vendas() {
             try {
                 // Buscamos a lista de vendas e os produtos do usuário em paralelo
                 const [respVendas, respProdutos] = await Promise.all([
-                    fetch('http://localhost:3000/api/vendas', {
+                    fetch(`${API_URL}/api/vendas`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     }),
-                    fetch(`http://localhost:3000/api/produtos/usuario/${payload.id}`, {
+                    fetch(`${API_URL}/api/produtos/usuario/${payload.id}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     })
                 ]);
@@ -123,7 +124,7 @@ export function Vendas() {
         const token = localStorage.getItem('ms2pdv_token');
 
         try {
-            const resposta = await fetch(`http://localhost:3000/api/vendas/${venda.id}`, {
+            const resposta = await fetch(`${API_URL}/api/vendas/${venda.id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 

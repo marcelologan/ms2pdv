@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { decodificarToken } from '../utils/auth';
+import { API_URL } from '../config/api';
 
 interface Usuario {
     id: number;
@@ -45,7 +46,7 @@ export function Perfil() {
         // Buscar dados do usuário no backend
         const carregarDadosUsuario = async () => {
             try {
-                const resposta = await fetch(`http://localhost:3000/api/usuarios/${payload.id}`, {
+                const resposta = await fetch(`${API_URL}/api/usuarios/${payload.id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -104,7 +105,7 @@ export function Perfil() {
                 bodyData.senha = senha;
             }
 
-            const resposta = await fetch(`http://localhost:3000/api/usuarios/${userId}`, {
+            const resposta = await fetch(`${API_URL}/api/usuarios/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

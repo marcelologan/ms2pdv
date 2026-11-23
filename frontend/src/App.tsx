@@ -1,5 +1,6 @@
 // 1. Importamos as ferramentas de roteamento da biblioteca
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 // 2. Importamos os nossos layouts fixos
 import { Header } from './components/Header';
@@ -70,6 +71,7 @@ function App() {
         {/* O Footer fica fixo na base do sistema */}
         <Footer />
       </div>
+      <Analytics />
     </BrowserRouter>
   );
 }
